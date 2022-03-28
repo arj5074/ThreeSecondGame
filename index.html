@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ThreeSecondGame</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let targetTime = 3;
+        let running = false;
+        let startTime = Date.now();
+        let storedTimes = [];
+        function startStop(){
+            if (running == false){
+                document.getElementById("theButton").innerHTML = "Stop";
+                running = true;
+                startTime = Date.now();
+            }
+            else {
+                document.getElementById("theButton").innerHTML = "Start";
+                running = false;
+                let elapsedTime = (Date.now() - startTime)/1000;
+                document.getElementById("timeShown").innerHTML = elapsedTime.toString();
+                storedTimes.push(elapsedTime);
+                console.log(storedTimes)
+                if (elapsedTime > targetTime + .5 || elapsedTime < targetTime-.5){
+                    document.getElementById("timeShown").setAttribute("style","color:red");
+                }
+                else if (elapsedTime > targetTime + .2 || elapsedTime < targetTime - .2){
+                    document.getElementById("timeShown").setAttribute("style","color:black");
+                }
+                else if (elapsedTime == targetTime) {
+                    document.getElementById("timeShown").setAttribute("style","color:green");
+                }
+                else{
+                    document.getElementById("timeShown").setAttribute("style","color:blue");
+                }
+            }
+        }
+    </script>
+    <button id="theButton" onclick="startStop()">Start</button>
+    <h2 id="timeShown" >
+
+    </h2>
+</body>
+</html>
