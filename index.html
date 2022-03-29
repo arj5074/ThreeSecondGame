@@ -22,7 +22,6 @@
                 let elapsedTime = (Date.now() - startTime)/1000;
                 document.getElementById("timeShown").innerHTML = elapsedTime.toString();
                 storedTimes.push(elapsedTime);
-                console.log(storedTimes)
                 if (elapsedTime > targetTime + .5 || elapsedTime < targetTime-.5){
                     document.getElementById("timeShown").setAttribute("style","color:red");
                 }
@@ -37,10 +36,37 @@
                 }
             }
         }
+        function createChart(){
+            for (i in storedTimes){
+                console.log(storedTimes[i]);
+            }
+        }
+        function calculateAvgTime() {
+            if (storedTimes.length != 0) {
+                let total = 0;
+                let min = storedTimes[0];
+                let max = storedTimes[0];
+                for (i in storedTimes) {
+                    total += storedTimes[i];
+                    if (min > storedTimes[i]){
+                        min = storedTimes[i];
+                    }
+                    if (max < storedTimes[i]){
+                        max = storedTimes[i];
+                    }
+                }
+                total = total / storedTimes.length;
+                console.log("Average: " + total.toString());
+                console.log("Min: " + min.toString());
+                console.log("Max: " + max.toString());
+            }
+        }
     </script>
     <button id="theButton" onclick="startStop()">Start</button>
     <h2 id="timeShown" >
 
     </h2>
+    <button id="chartButton" onclick="createChart()">Show Chart</button>
+    <button id="detailsButton" onclick="calculateAvgTime()">Details</button>
 </body>
 </html>
