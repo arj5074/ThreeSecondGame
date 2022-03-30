@@ -46,15 +46,15 @@
         function createChart(){
             if (chartOn == false){
                 chartOn = true;
+                let times = ['Times'];
                 for (i in storedTimes){
-                    let times = ['Times'];
                     times.push(storedTimes[i]);
                 }
                 chart = c3.generate({
                     bindto: '#chart',
                     data: {
                         columns: [
-                            times
+                            times,
                         ]
                     }
                 });
